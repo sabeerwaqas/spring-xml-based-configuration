@@ -1,21 +1,20 @@
-package spring.xml.based.configuration
-
--xml-based-configuration;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
+package spring.xml.based.configuration;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import spring.xml.based.configuration.services.OrderService;
 
-/**
- * Unit test for simple App.
- */
-public class AppTest {
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-    /**
-     * Rigorous Test :-)
-     */
+class AppTest {
+
     @Test
-    public void shouldAnswerWithTrue() {
-        assertTrue(true);
+    void loadsOrderServiceWithXmlConfiguration() {
+        try (ClassPathXmlApplicationContext context =
+                     new ClassPathXmlApplicationContext("beans.xml")) {
+            OrderService orderService = context.getBean("orderService", OrderService.class);
+
+            assertNotNull(orderService);
+        }
     }
 }
