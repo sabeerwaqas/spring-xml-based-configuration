@@ -1,11 +1,14 @@
 package spring.xml.based.configuration.services;
 
 public class OrderService {
-    private PaymentService paymentService;
+    private final PaymentService paymentService;
 
     public OrderService(PaymentService paymentService) {
         this.paymentService = paymentService;
-        System.out.println("OrderService constructor called");
-        System.out.println("PaymentService injected into OrderService: " + paymentService);
+    }
+
+    public void placeOrder(double amount) {
+        System.out.println("Placing order...");
+        paymentService.pay(amount);
     }
 }
